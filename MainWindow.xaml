@@ -1,0 +1,77 @@
+﻿<Window x:Class="WpfMediaPlayer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Медиаплеер" Height="300" Width="400"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!--Выбрать файл-->
+            <RowDefinition Height="Auto"/> <!--Трек-->
+            <RowDefinition Height="Auto"/> <!--Кнопки воспроизведения-->
+            <RowDefinition Height="Auto"/> <!--Громкость/Медиаплеер-->
+            <RowDefinition Height="Auto"/> <!--Прогрессбар-->
+            <RowDefinition Height="Auto"/> <!--Длина трека-->
+        </Grid.RowDefinitions>
+
+        <Button x:Name="SelectFileButton" 
+                Content="Выбрать файл" 
+                Click="SelectFileButton_Click"
+                Grid.Row="0"
+                Margin="0,5"/>
+
+        <TextBlock x:Name="TrackNameText" 
+                   Text="Трек не выбран"
+                   Grid.Row="1"
+                   Margin="0,10"
+                   HorizontalAlignment="Center"/>
+        <Slider x:Name="ProgressBar"
+                Grid.Row="3"
+                Minimum="0"
+                Value="0"
+                Margin="10,5"
+                PreviewMouseLeftButtonUp="ProgressBar_PreviewMouseLeftButtonUp"
+                PreviewMouseLeftButtonDown="ProgressBar_PreviewMouseLeftButtonDown"/>
+        <StackPanel Grid.Row="4" Orientation ="Horizontal" HorizontalAlignment="Center">
+            <TextBlock x:Name="CurrentTimeText" Text="00:00"/>
+            <TextBlock Text=" / " Margin="5,0"/>
+            <TextBlock x:Name="TotalTimeText" Text="00:00"/>
+        </StackPanel>
+
+
+
+        <StackPanel Orientation="Horizontal" 
+                    Grid.Row="2"
+                    HorizontalAlignment="Center">
+            <Button x:Name="PlayPauseButton" 
+                    Content="Play" 
+                    Width="50" 
+                    Margin="5"
+                    Click="PlayPauseButton_Click"/>
+            <Button x:Name="StopButton" 
+                    Content="Stop" 
+                    Width="50" 
+                    Margin="5"
+                    Click="StopButton_Click"/>
+        </StackPanel>
+
+        <MediaElement x:Name="mediaPlayer" 
+                      Grid.Row="3"
+                      LoadedBehavior="Manual"
+                      Visibility="Collapsed"/>
+        
+        <!--Громкость-->
+        <StackPanel Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+            <TextBlock Text="Громкость:" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <Slider x:Name="VolumeSlider"
+                    Width="200"
+                    Minimum="0"
+                    Maximum="1"
+                    Value="0.5"
+                    ValueChanged="VolumeSlider_ValueChanged"/>
+            <TextBlock x:Name="VolumeValueText" Text="50%" VerticalAlignment="Center" Margin="10,0,0,0"/>
+        </StackPanel>
+        
+        
+        
+    </Grid>
+</Window>
